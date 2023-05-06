@@ -23,19 +23,19 @@ module.exports = function (app, passport, db) {
 
   // message board routes ===============================================================
 
-  app.post('/api/speakers', express.json(), (req, res) => {
-    const newSpeaker = req.body;
-    const speakersCollection = client.db('test').collection('characters');
-    speakersCollection.insertOne(newSpeaker, (err, result) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(500);
-      } else {
-        console.log('New speaker added to database:', newSpeaker);
-        res.sendStatus(200);
-      }
-    });
-  });
+  // app.post('/api/speakers', express.json(), (req, res) => {
+  //   const newSpeaker = req.body;
+  //   const speakersCollection = client.db('test').collection('characters');
+  //   speakersCollection.insertOne(newSpeaker, (err, result) => {
+  //     if (err) {
+  //       console.log(err);
+  //       res.sendStatus(500);
+  //     } else {
+  //       console.log('New speaker added to database:', newSpeaker);
+  //       res.sendStatus(200);
+  //     }
+  //   });
+  // });
   // app.post("/messages", (req, res) => {
   //   db.collection("messages").save(
   //     { name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown: 0 },

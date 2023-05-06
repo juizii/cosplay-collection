@@ -164,8 +164,8 @@ function addCharacter(){
         </ul>
       </div>
       <div class="item-content">
-        <h3 class="title">New Speaker Name</h3>
-        <span class="sub">New Speaker Title</span>
+        <h3 class="title">Character Name</h3>
+        <span class="sub">Media Name</span>
       </div>
     </div>
   `;
