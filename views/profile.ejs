@@ -1,74 +1,3 @@
-<!-- <!doctype html>
-<html>
-<head>
-    <title>21 Savage Fan Site</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
-
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <!-- <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
-
-            </div>
-        </div>
-        <div class="col-sm-6">
-          <h3>Messages</h3>
-          <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-            <li class="message">
-              <span><%= messages[i].name %></span>
-              <span><%= messages[i].msg %></span>
-              <span><%= messages[i].thumbUp %></span>
-              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-              <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
-              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
-            </li>
-          <% } %>
-          </ul>
-
-          <h2>Add a message</h2>
-        <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
-            <input type="text" value="<%= user.local.email %>" name="name">
-            <input type="text" placeholder="message" name="msg">
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-        <% } %>
-
-</div>
-
-<script src="main.js"></script>
-
-</body>
-</html> --> 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,7 +68,7 @@
       <header class="header-area">
          <nav class="header-nav navbar fixed-top navbar-expand-lg position-absolute w-100">
             <div class="container header-nav-menu">
-               <a class="navbar-brand" href="index.html">
+               <a class="navbar-brand" href="/profile">
                   <img src="assets/images/cosplay/logo.png" alt="Header Logo">
                </a>
               
@@ -152,10 +81,10 @@
                         <a href="#about" class="nav-link py-3">About</a>
                      </li>
                      <li class="nav-item">
-                        <a href="#schedule" class="nav-link py-3">References</a>
+                        <a href="#speakers" class="nav-link py-3">Characters</a>
                      </li>
                      <li class="nav-item">
-                        <a href="#speakers" class="nav-link py-3">Characters</a>
+                        <a href="#schedule" class="nav-link py-3">References</a>
                      </li>
                   </ul>
                   <div class="mode-and-button d-flex align-items-center">
@@ -163,7 +92,7 @@
                         <img src="assets/images/icon/sun.svg" alt="Sun" class="fa-sun" style="display: none;">
                         <img src="assets/images/icon/moon.svg" alt="Moon" class="fa-moon">
                      </div>
-                     <button class="header-btn custom-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</button>
+                     <a href= "#countdown"><button class="header-btn custom-btn2">Next Con?</button></a>
                   </div>
                </div>
 
@@ -246,7 +175,8 @@
                                     Keep track of what you need done before your next con.
                                  </p>
                                  <div class="button-group">
-                                    <button class="custom-btn2" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign In</button>
+                                    <a href ="#speakers"><button class="custom-btn2">Get started</button></a>
+                                    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
                                  </div>
                                  <img src="assets/images/dots/dots.png" alt="Shadow Image" class="dots-1 opacity-50 img-moving-anim2">
                               </div>
@@ -337,14 +267,23 @@
       
       
       <!-- info sec start -->
-      <div class="info-sec">
+      <div class="info-sec" id ="countdown">
          <div class="container">
-           <div class="info-countdown" style="background-image: url(assets/images/banner/bg.png);">
-             <form>
+          
+           <div class="info-countdown"  style="background-image: url(assets/images/banner/bg.png);">
+            <div class="section-head col-xl-9 m-auto text-center mb-5">
+               <span class="label">Start the Countdown</span>
+               <h2 class="title mb-4">
+                  Here you can add your latest cosplay projects and organize all your references and links
+               </h2>
+            </div>
+             <form id="countdown">
                <label for="countdown-date">Enter Target Date (YYYY/MM/DD): </label>
                <input type="date" id="countdown-date" name="countdown-date" required >
                <ul class="counter-box d-flex justify-content-around" data-countdown="">
                </ul>
+
+               
                <div class="dots img-moving-anim2">
                   <img src="assets/images/dots/dots3.png" alt="Shadow Image">
                </div>
@@ -377,9 +316,7 @@
                                  <span class="date">October3,2023</span>
                                  <h5 class="title">Virtual sessions. Eventor Live@MAX</h5>
                               </div>
-                              <div class="about-video">
-                                 <a class="video-btn1 popup-video" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><span><i class="fas fa-play"></i></span></a>
-                              </div>
+                        
                            </div>
                         </div>      
                      </div>
@@ -409,9 +346,6 @@
                                  <span class="date">October3,2023</span>
                                  <h5 class="title">Inspiration Art</h5>
                               </div>
-                              <div class="about-video">
-                                 <a class="video-btn1 popup-video" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="http://www.youtube.com/watch?v=0O2aH4XLbto"><span><i class="fas fa-play"></i></span></a>
-                              </div>
                            </div>
                         </div> 
                      </div>
@@ -430,39 +364,248 @@
       <div class="container mt-5">
          <hr>
       </div>
+
+       <!-- speakers sec start -->
+       <section id="speakers" class="speakers-gallery-sec position-relative">
+         <div class="container">
+            <div class="section-head col-xl-8 m-auto text-center mb-5">
+               <span class="label">Create a new Character Project</span>
+               <h2 class="title">
+                  Here is where you can add your next character to list of cosplays.
+               </h2>
+            </div>
+            <div class="speakers-gallery-items-wrap">
+               <div class="row">
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
+                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                           <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
+                        </div>
+                        <div class="">
+                           <ul class="social-icons social">
+                              <li>
+                                 <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="item-content">
+                           <h3 class="title">Stella Smith</h3>
+                           <span class="sub">Eventor Live Max</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="600">
+                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                           <img src="assets/images/gallery/gallery2.jpg" alt="Gallery Image 2">
+                        </div>
+                        <ul class="social-icons social">
+                           <li>
+                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-twitter"></i></a>
+                           </li>
+                        </ul>
+                        <div class="item-content">
+                           <h3 class="title">Stella Smith</h3>
+                           <span class="sub">Eventor Live Max</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="800">
+                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                           <img src="assets/images/gallery/gallery3.jpg" alt="Gallery Image 3">
+                        </div>
+                        <ul class="social-icons social">
+                           <li>
+                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-twitter"></i></a>
+                           </li>
+                        </ul>
+                        <div class="item-content">
+                           <h3 class="title">Stella Smith</h3>
+                           <span class="sub">Eventor Live Max</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 col-lg-4 col-xl-3">
+                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                           <img src="assets/images/gallery/gallery4.jpg" alt="Gallery Image 4">
+                        </div>
+                        <ul class="social-icons social">
+                           <li>
+                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                           </li>
+                           <li>
+                              <a href=""><i class="fa-brands fa-twitter"></i></a>
+                           </li>
+                        </ul>
+                        <div class="item-content">
+                           <h3 class="title">Stella Smith</h3>
+                           <span class="sub">Eventor Live Max</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+               <div class="speakers-gallery-items-wrap">
+                  <div class="row">
+                     <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
+                           <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                              <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
+                           </div>
+                           <div class="">
+                              <ul class="social-icons social">
+                                 <li>
+                                    <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                                 </li>
+                                 <li>
+                                    <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                                 </li>
+                                 <li>
+                                    <a href=""><i class="fa-brands fa-twitter"></i></a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="item-content">
+                              <h3 class="title">Stella Smith</h3>
+                              <span class="sub">Eventor Live Max</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="600">
+                           <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                              <img src="assets/images/gallery/gallery2.jpg" alt="Gallery Image 2">
+                           </div>
+                           <ul class="social-icons social">
+                              <li>
+                                 <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
+                              </li>
+                           </ul>
+                           <div class="item-content">
+                              <h3 class="title">Stella Smith</h3>
+                              <span class="sub">Eventor Live Max</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="800">
+                           <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                              <img src="assets/images/gallery/gallery3.jpg" alt="Gallery Image 3">
+                           </div>
+                           <ul class="social-icons social">
+                              <li>
+                                 <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
+                              </li>
+                           </ul>
+                           <div class="item-content">
+                              <h3 class="title">Stella Smith</h3>
+                              <span class="sub">Eventor Live Max</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
+                           <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+                              <img src="assets/images/gallery/gallery4.jpg" alt="Gallery Image 4">
+                           </div>
+                           <ul class="social-icons social">
+                              <li>
+                                 <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                              </li>
+                              <li>
+                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
+                              </li>
+                           </ul>
+                           <div class="item-content">
+                              <h3 class="title">Stella Smith</h3>
+                              <span class="sub">Eventor Live Max</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               <div class="dots img-moving-anim1">
+                  <img src="assets/images/dots/dots8.png" alt="Shadow Image">
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+               <button class="custom-btn custom-btn2">+ Speakers</button>
+            </div>
+         </div>
+         <div class="shape">
+            <img src="assets/images/shape/3.svg" alt="">
+         </div>
+      </section>
+      <!-- speakers sec end -->
       
       <!-- schedule sec start -->
       <section id="schedule" class="schedule-sec">
          <div class="container">
             <div class="section-head text-center col-xl-8 m-auto mb-5">
-               <span class="label mb-4">Our Conference Schedule 2023</span>
+               <span class="label mb-4">Let's get started</span>
                <h2 class="title">
-                  An environment where participants and experts
-                  can exchange ideas and experiences
+                  Using our boards, you can manage your ideas and inspirations, as well as save your memories in the cosplays you've completed!
                </h2>
             </div>
             <div class="schedule-content-wrap">
                <ul class="nav nav-pills schedule-nav-tab mb-5" id="pills-tab" role="tablist">
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link active" id="pills-day-1-tab" data-bs-toggle="pill" data-bs-target="#pills-day-1" type="button" role="tab" aria-controls="pills-day-1" aria-selected="true">Day 01</button>
+                     <button class="nav-link active" id="pills-day-1-tab" data-bs-toggle="pill" data-bs-target="#pills-day-1" type="button" role="tab" aria-controls="pills-day-1" aria-selected="true">References</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-2-tab" data-bs-toggle="pill" data-bs-target="#pills-day-2" type="button" role="tab" aria-controls="pills-day-2" aria-selected="false">Day 02</button>
+                     <button class="nav-link" id="pills-day-2-tab" data-bs-toggle="pill" data-bs-target="#pills-day-2" type="button" role="tab" aria-controls="pills-day-2" aria-selected="false">Wigs</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-3-tab" data-bs-toggle="pill" data-bs-target="#pills-day-3" type="button" role="tab" aria-controls="pills-day-3" aria-selected="false">Day 03</button>
+                     <button class="nav-link" id="pills-day-3-tab" data-bs-toggle="pill" data-bs-target="#pills-day-3" type="button" role="tab" aria-controls="pills-day-3" aria-selected="false">Make-up</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-4-tab" data-bs-toggle="pill" data-bs-target="#pills-day-4" type="button" role="tab" aria-controls="pills-day-4" aria-selected="true">Day 04</button>
+                     <button class="nav-link" id="pills-day-4-tab" data-bs-toggle="pill" data-bs-target="#pills-day-4" type="button" role="tab" aria-controls="pills-day-4" aria-selected="true">Clothes</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-5-tab" data-bs-toggle="pill" data-bs-target="#pills-day-5" type="button" role="tab" aria-controls="pills-day-5" aria-selected="false">Day 05</button>
+                     <button class="nav-link" id="pills-day-5-tab" data-bs-toggle="pill" data-bs-target="#pills-day-5" type="button" role="tab" aria-controls="pills-day-5" aria-selected="false">Props</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-6-tab" data-bs-toggle="pill" data-bs-target="#pills-day-6" type="button" role="tab" aria-controls="pills-day-6" aria-selected="false">Day 06</button>
+                     <button class="nav-link" id="pills-day-6-tab" data-bs-toggle="pill" data-bs-target="#pills-day-6" type="button" role="tab" aria-controls="pills-day-6" aria-selected="false">Miscellaneous</button>
                   </li>
                   <li class="nav-item schedule-nav-item" role="presentation">
-                     <button class="nav-link" id="pills-day-7-tab" data-bs-toggle="pill" data-bs-target="#pills-day-7" type="button" role="tab" aria-controls="pills-day-7" aria-selected="false">Day 07</button>
+                     <button class="nav-link" id="pills-day-7-tab" data-bs-toggle="pill" data-bs-target="#pills-day-7" type="button" role="tab" aria-controls="pills-day-7" aria-selected="false">Convention Photos</button>
                   </li>
                   
                </ul>
@@ -1248,122 +1391,7 @@
       </section>
       <!-- video sec end -->
       
-      <!-- speakers sec start -->
-      <section id="speakers" class="speakers-gallery-sec position-relative">
-         <div class="container">
-            <div class="section-head col-xl-8 m-auto text-center mb-5">
-               <span class="label">Meet Our Experts, and Speakers</span>
-               <h2 class="title">
-                  Meet our fantastic speakers from around the globe
-                  and join in with live debates & events
-               </h2>
-            </div>
-            <div class="speakers-gallery-items-wrap">
-               <div class="row">
-                  <div class="col-md-6 col-lg-4 col-xl-3">
-                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
-                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                           <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
-                        </div>
-                        <div class="">
-                           <ul class="social-icons social">
-                              <li>
-                                 <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-                              </li>
-                              <li>
-                                 <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                              </li>
-                              <li>
-                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="item-content">
-                           <h3 class="title">Stella Smith</h3>
-                           <span class="sub">Eventor Live Max</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-xl-3">
-                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="600">
-                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                           <img src="assets/images/gallery/gallery2.jpg" alt="Gallery Image 2">
-                        </div>
-                        <ul class="social-icons social">
-                           <li>
-                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-twitter"></i></a>
-                           </li>
-                        </ul>
-                        <div class="item-content">
-                           <h3 class="title">Stella Smith</h3>
-                           <span class="sub">Eventor Live Max</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-xl-3">
-                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="800">
-                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                           <img src="assets/images/gallery/gallery3.jpg" alt="Gallery Image 3">
-                        </div>
-                        <ul class="social-icons social">
-                           <li>
-                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-twitter"></i></a>
-                           </li>
-                        </ul>
-                        <div class="item-content">
-                           <h3 class="title">Stella Smith</h3>
-                           <span class="sub">Eventor Live Max</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-lg-4 col-xl-3">
-                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
-                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                           <img src="assets/images/gallery/gallery4.jpg" alt="Gallery Image 4">
-                        </div>
-                        <ul class="social-icons social">
-                           <li>
-                              <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
-                           </li>
-                           <li>
-                              <a href=""><i class="fa-brands fa-twitter"></i></a>
-                           </li>
-                        </ul>
-                        <div class="item-content">
-                           <h3 class="title">Stella Smith</h3>
-                           <span class="sub">Eventor Live Max</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="dots img-moving-anim1">
-                  <img src="assets/images/dots/dots8.png" alt="Shadow Image">
-               </div>
-            </div>
-            <div class="d-flex justify-content-center mt-5">
-               <button class="custom-btn custom-btn2">+ Speakers</button>
-            </div>
-         </div>
-         <div class="shape">
-            <img src="assets/images/shape/3.svg" alt="">
-         </div>
-      </section>
-      <!-- speakers sec end -->
+     
       <div class="container">
          <hr>
       </div>
@@ -1618,9 +1646,9 @@
             <div class="modal-content popup-content p-4 bg-white">
                <button type="button" class="btn btn-secondary  ms-auto" data-bs-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
                
-               <div class="modal-body popup-body">
+               <!-- <div class="modal-body popup-body">
                   <iframe width="100%" height="400" src="https://www.youtube.com/embed/1dtzSRlfBDk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-               </div>
+               </div> -->
                
             </div>
          </div>

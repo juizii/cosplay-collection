@@ -7,16 +7,10 @@ module.exports = function (app, passport, db) {
   });
 
   // PROFILE SECTION =========================
-  app.get("/profile", isLoggedIn, function (req, res) {
-    db.collection("messages")
-      .find()
-      .toArray((err, result) => {
-        if (err) return console.log(err);
-        res.render("profile.ejs", {
-          user: req.user,
-          messages: result,
-        });
-      });
+  app.get('/profile', isLoggedIn, (req, res) => {
+    res.render('profile.ejs', {
+      user: req.user // get the user out of session and pass to template
+    });
   });
 
   // LOGOUT ==============================
@@ -116,14 +110,14 @@ module.exports = function (app, passport, db) {
   });
 
   // process the signup form
-  app.post(
-    "/signup",
-    passport.authenticate("local-signup", {
-      successRedirect: "/profile", // redirect to the secure profile section
-      failureRedirect: "/signup", // redirect back to the signup page if there is an error
-      failureFlash: true, // allow flash messages
-    })
-  );
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/profile', // redirect to the secure profile section
+    failureRedirect : '/signup', // redirect back to the signup page if there is an error
+    failureFlash : true // allow flash messages
+}), function(req, res) {
+    console.log("Request headers:", req.getHeaders());
+    console.log("Request body:", req.body);
+});
 
   // =============================================================================
   // UNLINK ACCOUNTS =============================================================
