@@ -156,7 +156,7 @@ function addCharacter(){
             <a href=""><i class="fa-brands fa-facebook-f"></i></a>
           </li>
           <li>
-            <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="">Edit</a>
           </li>
           <li>
             <a href=""><i class="fa-brands fa-twitter"></i></a>
@@ -176,3 +176,88 @@ function addCharacter(){
   console.log('it works')
 
 }
+
+//  // Get the input values
+//  const name = document.querySelector('#name').value;
+//  const title = document.querySelector('#title').value;
+//  // const image = speakerForm.elements.image.value;
+
+//  // Create a new gallery item
+//  const newGalleryItem = document.createElement('div');
+//  newGalleryItem.classList.add('col-md-6', 'col-lg-4', 'col-xl-3');
+//  newGalleryItem.innerHTML = `
+//    <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
+//      <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+   
+//      </div>
+//      <div class="">
+//        <ul class="social-icons social">
+//          <li>
+//            <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+//          </li>
+//          <li>
+//            <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+//          </li>
+//          <li>
+//            <a href=""><i class="fa-brands fa-twitter"></i></a>
+//          </li>
+//        </ul>
+//      </div>
+//      <div class="item-content">
+//        <h3 class="title">${name}</h3>
+//        <span class="sub">${title}</span>
+//      </div>
+//    </div>
+//  `;
+
+//  // Add the new gallery item to speakers gallery
+//  speakersGallery.querySelector('.speakers-gallery-items-wrap .row').appendChild(newGalleryItem);
+
+//  // Send the speaker data to the server
+//  const data = { name, title, image };
+//  fetch('/speakers', {
+//    method: 'POST',
+//    headers: {
+//      'Content-Type': 'application/json'
+//    },
+//    body: JSON.stringify(data)
+//  })
+//  .then(response => response.json())
+//  .then(data => console.log(data))
+//  .catch(error => console.error(error));
+
+//  // Reset the form
+//  speakerForm.reset();
+// }
+
+// Get the Facebook icon
+const facebookIcon = document.getElementById('facebook-icon');
+
+// Add a click event listener to the Facebook icon
+facebookIcon.addEventListener('click', function() {
+
+  // Display the file input dialog box
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = function() {
+
+    // Get the selected file
+    const file = this.files[0];
+
+    // Create a new FileReader object
+    const reader = new FileReader();
+
+    // Set the onload event handler
+    reader.onload = function(e) {
+
+      // Set the src attribute of the img tag to the selected image
+      const img = facebookIcon.parentNode.parentNode.previousElementSibling;
+      img.src = e.target.result;
+    };
+
+    // Read the selected file as a data URL
+    reader.readAsDataURL(file);
+  };
+  input.click();
+});
