@@ -138,173 +138,164 @@
     
 })(jQuery);
 
-document.querySelector('#speakerAdd').addEventListener('click', addCharacter)
-const speakersGallery = document.getElementById('speakers');
-function addCharacter(){
+var trash = document.getElementsByClassName("fa-trash");
 
-  const newGalleryItem = document.createElement('div');
-  newGalleryItem.classList.add('col-md-6', 'col-lg-4', 'col-xl-3');
-  newGalleryItem.innerHTML = `
-  
-    <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
-      <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-        <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
-      </div>
-      <div class="">
-        <ul class="social-icons social">
-          <li>
-            <a href="">Work</a>
-          </li>
-          <li>
-            <a href="" class="edit-speaker-btn" data-speaker-id="1">Edit</a>
-          </li>
-          <li>
-            <a href="">Delete</a>
-          </li>
-        </ul>
-      </div>
-      <div class="item-content">
-        <h3 class="title">Character Name</h3>
-        <span class="sub">Media Name</span>
-      </div>
-    </div>
-  `;
-  
-  // add new gallery item to speakers gallery
-  speakersGallery.querySelector('.speakers-gallery-items-wrap .row').appendChild(newGalleryItem);
+Array.from(trash).forEach(function(element) {
+      element.addEventListener('click', function(){
+        const pic = this.parentNode.parentNode.childNodes[1].innerText
+        const name = this.parentNode.parentNode.childNodes[3].innerText
+        const media = this.parentNode.parentNode.childNodes[5].innerText
+        fetch('messages', {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'pic': pic,
+            'name': name,
+            'media':media
+          })
+        }).then(function (response) {
+          window.location.reload()
+        })
+      });
+});
 
-  // Select the edit button and add an event listener
-  const editBtn = newGalleryItem.querySelector('.edit-speaker-btn');
-  editBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-  
-    // Retrieve the speaker ID from the data attribute
-    const speakerId = event.target.getAttribute('data-speaker-id');
 
-    // Open the modal with a form for editing the speaker
-    const modal = document.getElementById('edit-speaker-modal');
-    modal.style.display = 'block';
+// document.querySelector('#speakerAdd').addEventListener('click', addCharacter)
+// const speakersGallery = document.getElementById('speakers');
+// function addCharacter(){
+
+//   const newGalleryItem = document.createElement('div');
+//   newGalleryItem.classList.add('col-md-6', 'col-lg-4', 'col-xl-3');
+//   newGalleryItem.innerHTML = `
   
-    // Populate the form with the current speaker data
-    const speakerNameInput = modal.querySelector('#speaker-name-input');
-    const mediaNameInput = modal.querySelector('#media-name-input');
-    // ...
+//     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
+//       <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
+//         <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
+//       </div>
+//       <div class="">
+//         <ul class="social-icons social">
+//           <li>
+//             <a href="">Work</a>
+//           </li>
+//           <li>
+//             <a href="" class="edit-speaker-btn" data-speaker-id="1">Edit</a>
+//           </li>
+//           <li>
+//             <a href="">Delete</a>
+//           </li>
+//         </ul>
+//       </div>
+//       <div class="item-content">
+//         <h3 class="title">Character Name</h3>
+//         <span class="sub">Media Name</span>
+//       </div>
+//     </div>
+//   `;
   
-    // Add an event listener to the form submit button
-    const submitBtn = modal.querySelector('#submit-btn');
-    submitBtn.addEventListener('click', (event) => {
-      event.preventDefault();
+//   // add new gallery item to speakers gallery
+//   speakersGallery.querySelector('.speakers-gallery-items-wrap .row').appendChild(newGalleryItem);
+
+//   // Select the edit button and add an event listener
+//   const editBtn = newGalleryItem.querySelector('.edit-speaker-btn');
+//   editBtn.addEventListener('click', (event) => {
+//     event.preventDefault();
+  
+//     // Retrieve the speaker ID from the data attribute
+//     const speakerId = event.target.getAttribute('data-speaker-id');
+
+//     // Open the modal with a form for editing the speaker
+//     const modal = document.getElementById('edit-speaker-modal');
+//     modal.style.display = 'block';
+  
+//     // Populate the form with the current speaker data
+//     const speakerNameInput = modal.querySelector('#speaker-name-input');
+//     const mediaNameInput = modal.querySelector('#media-name-input');
+//     // ...
+  
+//     // Add an event listener to the form submit button
+//     const submitBtn = modal.querySelector('#submit-btn');
+//     submitBtn.addEventListener('click', (event) => {
+//       event.preventDefault();
     
-      // Retrieve the new speaker data from the form
-      const newSpeakerName = speakerNameInput.value;
-      const newMediaName = mediaNameInput.value;
-      // ...
+//       // Retrieve the new speaker data from the form
+//       const newSpeakerName = speakerNameInput.value;
+//       const newMediaName = mediaNameInput.value;
+//       // ...
     
-      fetch(`/speakers/${speakerId}`)
-        .then(response => response.json())
-        .then(speaker => {
-          // Set the values of the form fields to the speaker data
-          speakerNameInput.value = speaker.name;
-          mediaNameInput.value = speaker.media;
+//       fetch(`/speakers/${speakerId}`)
+//         .then(response => response.json())
+//         .then(speaker => {
+//           // Set the values of the form fields to the speaker data
+//           speakerNameInput.value = speaker.name;
+//           mediaNameInput.value = speaker.media;
        
-        // ...
-      })
-      .catch(error => console.error(error));
-    });
+//         // ...
+//       })
+//       .catch(error => console.error(error));
+//     });
+//   });
+// }
+
+
+// Add event listener to the submit button in the edit speaker modal
+document.getElementById("submit-btn").addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent the form from submitting
+  
+  // Get the speaker ID and updated speaker data from the modal form
+  const speakerId = document.getElementById("edit-speaker-form").getAttribute("data-speaker-id");
+  const updatedSpeakerData = {
+    speakerName: document.getElementById("speaker-name-input").value,
+    mediaName: document.getElementById("media-name-input").value
+  };
+  
+  fetch(`/speakers/${speakerId}`, {
+    method: "PUT",
+    body: JSON.stringify(updatedSpeakerData),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      // Reload the page to show the updated speaker data
+      location.reload();
+      console.log("it's working")
+    } else {
+      // Display an error message if the server request fails
+      throw new Error("Error updating speaker data");
+    }
+  })
+  .catch(error => {
+    console.error(error);
   });
-}
+});
 
+const editSpeakerModal = document.getElementById('edit-speaker-modal');
+const editSpeakerForm = document.getElementById('edit-speaker-form');
 
-// // Add event listener to the submit button in the edit speaker modal
-// document.getElementById("submit-btn").addEventListener("click", function(event) {
-//   event.preventDefault(); // Prevent the form from submitting
-  
-//   // Get the speaker ID and updated speaker data from the modal form
-//   const speakerId = document.getElementById("edit-speaker-form").getAttribute("data-speaker-id");
-//   const updatedSpeakerData = {
-//     speakerName: document.getElementById("speaker-name-input").value,
-//     mediaName: document.getElementById("media-name-input").value
-//   };
-  
-//   fetch(`/speakers/${speakerId}`, {
-//     method: "PUT",
-//     body: JSON.stringify(updatedSpeakerData),
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   })
-//   .then(response => {
-//     if (response.ok) {
-//       // Reload the page to show the updated speaker data
-//       location.reload();
-//       console.log("it's working")
-//     } else {
-//       // Display an error message if the server request fails
-//       throw new Error("Error updating speaker data");
-//     }
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
-// });
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('edit-speaker-btn')) {
+    const speakerId = event.target.dataset.speakerId;
+    const speakerName = event.target.dataset.speakerName;
+    const mediaName = event.target.dataset.mediaName;
 
-// const editSpeakerModal = document.getElementById('edit-speaker-modal');
-// const editSpeakerForm = document.getElementById('edit-speaker-form');
+    const speakerNameInput = editSpeakerForm.querySelector('#speaker-name-input');
+    const mediaNameInput = editSpeakerForm.querySelector('#media-name-input');
 
-// document.addEventListener('click', function(event) {
-//   if (event.target.classList.contains('edit-speaker-btn')) {
-//     const speakerId = event.target.dataset.speakerId;
-//     const speakerName = event.target.dataset.speakerName;
-//     const mediaName = event.target.dataset.mediaName;
+    speakerNameInput.value = speakerName || '';
+    mediaNameInput.value = mediaName || '';
 
-//     const speakerNameInput = editSpeakerForm.querySelector('#speaker-name-input');
-//     const mediaNameInput = editSpeakerForm.querySelector('#media-name-input');
+    editSpeakerForm.setAttribute('data-speaker-id', speakerId);
+    editSpeakerModal.style.display = 'block';
+  }
+});
 
-//     speakerNameInput.value = speakerName || '';
-//     mediaNameInput.value = mediaName || '';
-
-//     editSpeakerForm.setAttribute('data-speaker-id', speakerId);
-//     editSpeakerModal.style.display = 'block';
-//   }
-// });
-
-// // Add event listener to the submit button in the edit speaker modal
-// document.getElementById("submit-btn").addEventListener("click", function(event) {
-//   event.preventDefault(); // Prevent the form from submitting
-  
-//   // Get the speaker ID and updated speaker data from the modal form
-//   const speakerId = editSpeakerForm.getAttribute("data-speaker-id");
-//   const updatedSpeakerData = {
-//     speakerName: document.getElementById("speaker-name-input").value,
-//     mediaName: document.getElementById("media-name-input").value
-//   };
-  
-//   fetch(`/speakers/${speakerId}`, {
-//     method: "PUT",
-//     body: JSON.stringify(updatedSpeakerData),
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   })
-//   .then(response => {
-//     if (response.ok) {
-//       // Reload the page to show the updated speaker data
-//       location.reload();
-//       console.log("it's working")
-//     } else {
-//       // Display an error message if the server request fails
-//       throw new Error("Error updating speaker data");
-//     }
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
-// });
-
-// const closeBtn = document.getElementById('close');
-// closeBtn.addEventListener('click', function() {
-//   editSpeakerModal.style.display = 'none';
-// });
+const closeBtn = document.getElementById('close');
+closeBtn.addEventListener('click', function() {
+  editSpeakerModal.style.display = 'none';
+});
 
 //  // Get the input values
 //  const name = document.querySelector('#name').value;

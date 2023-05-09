@@ -23,10 +23,16 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   });
 
   // PROFILE SECTION =========================
-  app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile.ejs', {
-      user: req.user // get the user out of session and pass to template
-    });
+  app.get("/profile", isLoggedIn, function (req, res) {
+    db.collection("log")
+      .find()
+      .toArray((err, result) => {
+        if (err) return console.log(err);
+        res.render("profile.ejs", {
+          user: req.user,
+          messages: result,
+        });
+      });
   });
 
   // LOGOUT ==============================
@@ -38,19 +44,45 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   });
 
   // message board routes ===============================================================
-
-app.post("/speakers", (req, res) => {
-  const newSpeaker = req.body;
-  db.collection("demo").insertOne(newSpeaker, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.status(500).send("Error saving speaker to database");
-      return;
-    }
-    console.log("saved to database");
-    res.redirect("/profile");
+  app.post("/messages", (req, res) => {
+    db.collection("log").save(
+      { pic: req.body.pic, name: req.body.name, media: req.body.media},
+      (err, result) => {
+        if (err) return console.log(err);
+        console.log("saved to database");
+        res.redirect("/profile");
+      }
+    );
   });
-});
+
+  app.put("/messages", (req, res) => {
+    db.collection("log").findOneAndUpdate(
+      { pic: req.body.pic, name: req.body.name, media: req.body.media },
+      {
+        $set: {
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: true,
+      },
+      (err, result) => {
+        if (err) return res.send(err);
+        res.send(result);
+      }
+    );
+  });
+
+  app.delete("/messages", (req, res) => {
+    db.collection("log").findOneAndDelete(
+      { date: req.body.date, msg: req.body.msg, feeling: req.body.feeling },
+      (err, result) => {
+        if (err) return res.send(500, err);
+        res.send("Message deleted!");
+      }
+    );
+  });
+
 
 // // Get all speakers
 // app.get('/speakers', (req, res) => {
