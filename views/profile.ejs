@@ -265,14 +265,13 @@
       </header>
       <!-- header area end -->
       
-      
       <!-- info sec start -->
-      <div class="info-sec" id ="countdown">
+      <div class="info-sec" >
          <div class="container">
           
            <div class="info-countdown"  style="background-image: url(assets/images/banner/bg.png);">
             <div class="section-head col-xl-9 m-auto text-center mb-5">
-               <span class="label">Start the Countdown</span>
+               <span class="label" id ="countdown">Start the Countdown</span>
             </div>
              <form id="countdown">
                <label for="countdown-date">Enter the date for your next con: </label>
@@ -377,32 +376,34 @@
             </div>
             <div class="speakers-gallery-items-wrap">
                <div class="row">
-                  <div class="col-md-6 col-lg-4 col-xl-3">
-                     <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
-                        <div class="speakers-gallery-item-thumb overflow-hidden position-relative">
-                           <img src="assets/images/gallery/gallery1.jpg" alt="Gallery Image 1">
-                        </div>
-                        <div class="">
-                           <ul class="social-icons social">
-                              <li>
-                                 <a href=""><i class="fa-brands fa-facebook-f" id="facebook-icon"></i></a>
-                              </li>
-                              <li>
-                                 <a href="">Edit</a>
-                              </li>
-                              <li>
-                                 <a href=""><i class="fa-brands fa-twitter"></i></a>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="item-content">
-                           <h3 class="title">Character Name</h3>
-                           <span class="sub">Media Name</span>
-                        </div>
-                     </div>
-                  </div>
+                 <div class="col-md-6 col-lg-4 col-xl-3">
+                   <div class="speakers-gallery-item" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="400">
+   
+                   </div>
+                 </div>
                  
-                      
+             
+                 <div id="edit-speaker-modal" class="modal">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2>Edit Speaker</h2>
+                      <span id="close" class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                      <form id="edit-speaker-form" action="/messages/reply" method="POST">
+                        <div class="form-group">
+                           <label for="speaker-name-input">Speaker Name</label>
+                           <input type="text" id="speaker-name-input" name="speakerName" required>
+                         </div>
+                         <div class="form-group">
+                           <label for="media-name-input">Media Name</label>
+                           <input type="text" id="media-name-input" name="mediaName" required>
+                         </div>
+                         <button type="submit" id="submit-btn">Save Changes</button>
+                      </form>
+                    </div>
+                  </div>
+   
                   </div>
                <div class="dots img-moving-anim1">
                   <img src="assets/images/dots/dots8.png" alt="Shadow Image">
