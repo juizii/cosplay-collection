@@ -162,6 +162,7 @@ Array.from(trash).forEach(function(element) {
 });
 
 
+
 // document.querySelector('#speakerAdd').addEventListener('click', addCharacter)
 // const speakersGallery = document.getElementById('speakers');
 // function addCharacter(){
@@ -238,64 +239,6 @@ Array.from(trash).forEach(function(element) {
 //   });
 // }
 
-
-// Add event listener to the submit button in the edit speaker modal
-document.getElementById("submit-btn").addEventListener("click", function(event) {
-  event.preventDefault(); // Prevent the form from submitting
-  
-  // Get the speaker ID and updated speaker data from the modal form
-  const speakerId = document.getElementById("edit-speaker-form").getAttribute("data-speaker-id");
-  const updatedSpeakerData = {
-    speakerName: document.getElementById("speaker-name-input").value,
-    mediaName: document.getElementById("media-name-input").value
-  };
-  
-  fetch(`/speakers/${speakerId}`, {
-    method: "PUT",
-    body: JSON.stringify(updatedSpeakerData),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      // Reload the page to show the updated speaker data
-      location.reload();
-      console.log("it's working")
-    } else {
-      // Display an error message if the server request fails
-      throw new Error("Error updating speaker data");
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  });
-});
-
-const editSpeakerModal = document.getElementById('edit-speaker-modal');
-const editSpeakerForm = document.getElementById('edit-speaker-form');
-
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('edit-speaker-btn')) {
-    const speakerId = event.target.dataset.speakerId;
-    const speakerName = event.target.dataset.speakerName;
-    const mediaName = event.target.dataset.mediaName;
-
-    const speakerNameInput = editSpeakerForm.querySelector('#speaker-name-input');
-    const mediaNameInput = editSpeakerForm.querySelector('#media-name-input');
-
-    speakerNameInput.value = speakerName || '';
-    mediaNameInput.value = mediaName || '';
-
-    editSpeakerForm.setAttribute('data-speaker-id', speakerId);
-    editSpeakerModal.style.display = 'block';
-  }
-});
-
-const closeBtn = document.getElementById('close');
-closeBtn.addEventListener('click', function() {
-  editSpeakerModal.style.display = 'none';
-});
 
 //  // Get the input values
 //  const name = document.querySelector('#name').value;

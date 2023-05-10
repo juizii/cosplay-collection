@@ -383,7 +383,7 @@
                         <tbody>
                           <% for(var i=0; i<messages.length; i++) { %>
                             <tr>
-                              <td><%= messages[i].pic %></td>
+                            <td> <img class="img-fluid" src="<%= messages[i].image%>"></td>
                               <td><%= messages[i].name %></td>
                               <td><%= messages[i].media %></td>
                               <td><i class="fa fa-trash" aria-hidden="true"></i></td>
@@ -394,9 +394,15 @@
 
                    </div>
                  </div>
-                 
+                 <form action="/messages" method="POST">
+                  <label for="imgUpload" class="form-label">Image</label>
+                  <input type="file" class="form-control" id="imageUpload" name="file">
+                  <input type="text" placeholder="name" name="name" required>
+                  <input type="text" placeholder="media" name="media" required>
+                  <button type="submit">Submit</button>
+                </form>
                
-                 
+
              
                  <div id="edit-speaker-modal" class="modal">
                   <div class="modal-content">
@@ -405,12 +411,7 @@
                       <span id="close" class="close">&times;</span>
                     </div>
                     <div class="modal-body">
-                     <form action="/messages" method="POST">
-                        <input type="file" placeholder= "pic" name="pic" required>
-                        <input type="text" placeholder="name" name="name" required>
-                        <input type="text" placeholder="media" name="media" required>
-                        <button type="submit">Submit</button>
-                      </form>
+                     
                     </div>
                   </div>
    
